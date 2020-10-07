@@ -47,6 +47,10 @@ Log.d("ASYNC PICKPOCKET","${events.await().size}")
 //producer channel
 //takes android context as argument
 calendarProducer(this).consumeEach { event -> Log.d("PICKPOCKET PRODUCER", event.toString()) }
+
+//launch
+calendarLaunch(this@MyService).forEach { event -> Log.d("PICKPOCKET LAUNCH", event.toString()) }
+
 ```
 ## Ask a Question?
 - Use [Github issues](https://github.com/evilthreads669966/pickpocket/issues)
