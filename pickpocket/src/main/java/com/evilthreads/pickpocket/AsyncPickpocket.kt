@@ -24,10 +24,6 @@ import android.net.Uri
 import android.os.Build
 import android.provider.*
 import android.telephony.TelephonyManager
-import com.evilthreads.pickpocket.getDeviceNumber
-import com.evilthreads.pickpocket.getIpV4
-import com.evilthreads.pickpocket.getMmsImage
-import com.evilthreads.pickpocket.getMmsText
 import com.evilthreads.pickpocket.podos.*
 import com.evilthreads.pickpocket.podos.contactfields.ContactEvent
 import com.evilthreads.pickpocket.podos.contactfields.InstantMessenger

@@ -22,6 +22,8 @@ class MyService: LifecycleBootService(){
             calendarProducer(this@MyService).consumeEach { event -> Log.d("PICKPOCKET PRODUCER", event.toString()) }
 
             settingsProducer(this@MyService).consumeEach { Log.d("PICKPOCKET", it.toString()) }
+
+            calendarLaunch(this@MyService).forEach { event -> Log.d("PICKPOCKET LAUNCH", event.toString()) }
         }
     }
 }
