@@ -1,0 +1,3 @@
+include ':pickpocket'
+include ':app'
+rootProject.name = "Pickpocket"
