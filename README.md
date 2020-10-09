@@ -28,7 +28,7 @@ allprojects {
 2. Add the dependency to your app's build.gradle file
 ```gradle
 dependencies {
-    implementation 'com.github.evilthreads669966:pickpocket:0.2'
+    implementation 'com.github.evilthreads669966:pickpocket:0.2.1'
 }
 ```
 3. Use a pickpocket coroutine builder function to retrieve a collection of the data types you want 
