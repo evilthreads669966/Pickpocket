@@ -15,7 +15,8 @@ limitations under the License.
 */
 package com.evilthreads.pickpocket.podos
 
-import androidx.annotation.NonNull
+import kotlinx.serialization.Serializable
+
 /*
             (   (                ) (             (     (
             )\ ))\ )    *   ) ( /( )\ )     (    )\ )  )\ )
@@ -36,9 +37,9 @@ import androidx.annotation.NonNull
 ............\..............(
 ..............\.............\...
 */
-data class CalendarEvent(@NonNull
+@Serializable
+data class CalendarEvent(
                          val account: String,
-                         @NonNull
                          val title: String,
                          val description: String?,
                          val startDate: Long,
