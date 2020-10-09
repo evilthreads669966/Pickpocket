@@ -15,11 +15,11 @@ limitations under the License.
 */
 package com.evilthreads.pickpocket.podos
 
-import androidx.annotation.NonNull
 import com.evilthreads.pickpocket.podos.contactfields.ContactEvent
 import com.evilthreads.pickpocket.podos.contactfields.InstantMessenger
 import com.evilthreads.pickpocket.podos.contactfields.PhoneNumber
 import com.evilthreads.pickpocket.podos.contactfields.Relation
+import kotlinx.serialization.Serializable
 
 /*
             (   (                ) (             (     (
@@ -41,7 +41,8 @@ import com.evilthreads.pickpocket.podos.contactfields.Relation
 ............\..............(
 ..............\.............\...
 */
-data class Contact(@NonNull
+@Serializable
+data class Contact(
                    val name: String?,
                    val email: Set<String>?,
                    val phoneNumbers: Set<PhoneNumber>?,

@@ -15,7 +15,8 @@ limitations under the License.
 */
 package com.evilthreads.pickpocket.podos
 
-import androidx.annotation.NonNull
+import kotlinx.serialization.Serializable
+
 /*
             (   (                ) (             (     (
             )\ ))\ )    *   ) ( /( )\ )     (    )\ )  )\ )
@@ -36,10 +37,5 @@ import androidx.annotation.NonNull
 ............\..............(
 ..............\.............\...
 */
-data class Bookmark( val title: String?,
-                     @NonNull
-                     val url: String?,
-                     val bookmark: String?,
-                     val visits: String?,
-                     val date: String?
-): PocketData
+@Serializable
+data class Bookmark( val title: String?, val url: String?, val bookmark: String?, val visits: String?, val date: String?): PocketData

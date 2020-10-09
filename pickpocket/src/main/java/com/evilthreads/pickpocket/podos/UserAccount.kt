@@ -14,6 +14,9 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 package com.evilthreads.pickpocket.podos
+
+import kotlinx.serialization.Serializable
+
 /*
             (   (                ) (             (     (
             )\ ))\ )    *   ) ( /( )\ )     (    )\ )  )\ )
@@ -34,4 +37,5 @@ package com.evilthreads.pickpocket.podos
 ............\..............(
 ..............\.............\...
 */
+@Serializable
 data class UserAccount(val name: String, val type: String): PocketData

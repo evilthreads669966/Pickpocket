@@ -15,7 +15,8 @@ limitations under the License.
 */
 package com.evilthreads.pickpocket.podos
 
-import androidx.annotation.NonNull
+import kotlinx.serialization.Serializable
+
 /*
             (   (                ) (             (     (
             )\ ))\ )    *   ) ( /( )\ )     (    )\ )  )\ )
@@ -36,4 +37,6 @@ import androidx.annotation.NonNull
 ............\..............(
 ..............\.............\...
 */
-inline class DictionaryWord(@NonNull val word: String?): PocketData
+// TODO: 10/8/20 serializable does not support inline classes yet
+@Serializable
+data class DictionaryWord(val word: String?): PocketData

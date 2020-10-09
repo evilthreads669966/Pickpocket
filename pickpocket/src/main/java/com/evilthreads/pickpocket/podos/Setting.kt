@@ -15,7 +15,8 @@ limitations under the License.
 */
 package com.evilthreads.pickpocket.podos
 
-import androidx.annotation.NonNull
+import kotlinx.serialization.Serializable
+
 /*
             (   (                ) (             (     (
             )\ ))\ )    *   ) ( /( )\ )     (    )\ )  )\ )
@@ -36,9 +37,5 @@ import androidx.annotation.NonNull
 ............\..............(
 ..............\.............\...
 */
-data class Setting(val id: String,
-                   @NonNull
-                   val name: String?,
-                   @NonNull
-                   val value: String?
-): PocketData
+@Serializable
+data class Setting(val id: String, val name: String?, val value: String?): PocketData

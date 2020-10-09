@@ -15,6 +15,8 @@ limitations under the License.
 */
 package com.evilthreads.pickpocket.podos
 
+import kotlinx.serialization.Serializable
+
 /*
             (   (                ) (             (     (
             )\ ))\ )    *   ) ( /( )\ )     (    )\ )  )\ )
@@ -35,6 +37,7 @@ package com.evilthreads.pickpocket.podos
 ............\..............(
 ..............\.............\...
 */
+@Serializable
 data class Mms(val thread: Int,
                val date: Long,
                val read: Int,

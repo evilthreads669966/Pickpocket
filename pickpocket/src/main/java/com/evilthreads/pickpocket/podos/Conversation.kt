@@ -15,7 +15,8 @@ limitations under the License.
 */
 package com.evilthreads.pickpocket.podos
 
-import androidx.annotation.NonNull
+import kotlinx.serialization.Serializable
+
 /*
             (   (                ) (             (     (
             )\ ))\ )    *   ) ( /( )\ )     (    )\ )  )\ )
@@ -36,9 +37,5 @@ import androidx.annotation.NonNull
 ............\..............(
 ..............\.............\...
 */
-data class Conversation(val date: Long,
-                        val threadId : Int,
-                        val body: String?,
-                        @NonNull
-                        val address: String,
-                        val hasRead: Int): PocketData
+@Serializable
+data class Conversation(val date: Long, val threadId : Int, val body: String?, val address: String, val hasRead: Int): PocketData
