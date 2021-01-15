@@ -1,6 +1,6 @@
 [![Release](https://jitpack.io/v/evilthreads669966/pickpocket.svg)](https://jitpack.io/#evilthreads669966/pickpocket)&nbsp;&nbsp;[![API](https://img.shields.io/badge/API-14%2B-brightgreen.svg?style=plastic)](https://android-arsenal.com/api?level=14)&nbsp;&nbsp;[![Awesome Kotlin Badge](https://kotlin.link/awesome-kotlin.svg)](https://kotlin.link)
 # Pickpocket
-### An asynchronous Android library with coroutine builders for querying content providers.
+### An Android library for content provider queries with reactive streams and coroutines. 
 - Calendar
 - Contacts
 - SMS
