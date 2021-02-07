@@ -44,7 +44,7 @@ suspend fun CoroutineScope.calendarLaunch(ctx: Context): List<CalendarEvent>{
     if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
         if(ctx.checkSelfPermission(Manifest.permission.READ_CALENDAR) != PackageManager.PERMISSION_GRANTED)
             return events
-    launch {
+    launch(Dispatchers.IO) {
         val projection = arrayOf(
             CalendarContract.Events._ID, CalendarContract.Events.ACCOUNT_NAME, CalendarContract.Events.TITLE, CalendarContract.Events.DESCRIPTION,
             CalendarContract.Events.DTSTART, CalendarContract.Events.DTEND, CalendarContract.Events.ALL_DAY, CalendarContract.Events.DURATION,
@@ -93,7 +93,7 @@ suspend fun CoroutineScope.smsLaunch(ctx: Context): List<Sms>{
     if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
         if(ctx.checkSelfPermission(Manifest.permission.READ_SMS) != PackageManager.PERMISSION_GRANTED)
             return smsMessages
-    launch {
+    launch(Dispatchers.IO) {
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT){
             val projection = arrayOf(Telephony.Sms._ID, Telephony.Sms.THREAD_ID, Telephony.Sms.TYPE, Telephony.Sms.BODY, Telephony.Sms.ADDRESS, Telephony.Sms.DATE)
             ctx.contentResolver.query(Telephony.Sms.CONTENT_URI, projection, null, null, Telephony.Sms.DEFAULT_SORT_ORDER)?.use { cur ->
@@ -150,7 +150,7 @@ suspend fun CoroutineScope.callLogLaunch(ctx: Context): List<CallLogEntry>{
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
         if (ctx.checkSelfPermission(Manifest.permission.READ_CALL_LOG) != PackageManager.PERMISSION_GRANTED)
             return calls
-    launch {
+    launch(Dispatchers.IO) {
         val projection = arrayOf(CallLog.Calls._ID, CallLog.Calls.TYPE, CallLog.Calls.NUMBER, CallLog.Calls.DATE, CallLog.Calls.DURATION)
         ctx.contentResolver.query(CallLog.Calls.CONTENT_URI, projection, null, null, CallLog.Calls.DEFAULT_SORT_ORDER)?.use { cur ->
             if (cur.moveToFirst()) {
@@ -180,7 +180,7 @@ suspend fun CoroutineScope.contactsLaunch(ctx: Context): List<Contact>{
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
         if (ctx.checkSelfPermission(Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED)
             return contacts
-    launch {
+    launch(Dispatchers.IO) {
         //val projection = arrayOf(ContactsContract.Contacts._ID, ContactsContract.Contacts.LOOKUP_KEY, ContactsContract.Contacts.DISPLAY_NAME, ContactsContract.Contacts.PHOTO_URI, ContactsContract.Contacts.HAS_PHONE_NUMBER)
         val projection = arrayOf(ContactsContract.Contacts._ID, ContactsContract.Contacts.DISPLAY_NAME)
         ctx.contentResolver.query(ContactsContract.Contacts.CONTENT_URI, projection, null, null, ContactsContract.Contacts.SORT_KEY_PRIMARY)?.use { cur ->
@@ -332,7 +332,7 @@ suspend fun CoroutineScope.mmsLaunch(ctx: Context): List<Mms>{
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
         if (ctx.checkSelfPermission(Manifest.permission.READ_SMS) != PackageManager.PERMISSION_GRANTED)
             return mmsMessages
-    launch {
+    launch(Dispatchers.IO) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             val projection = arrayOf(Telephony.Mms._ID, Telephony.Mms.DATE, Telephony.Mms.READ, Telephony.Mms.THREAD_ID)
             ctx.contentResolver.query(Telephony.Mms.CONTENT_URI, projection, null, null, Telephony.Mms.DEFAULT_SORT_ORDER)?.use { cur ->
@@ -506,7 +506,7 @@ suspend fun CoroutineScope.filesLaunch(ctx: Context, driveVolume: String = "exte
     if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
         if(ctx.checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
             return files
-    launch {
+    launch(Dispatchers.IO) {
         lateinit var projection: Array<String>
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q)
             projection = arrayOf(MediaStore.Files.FileColumns._ID, MediaStore.Files.FileColumns.DATE_ADDED, MediaStore.Files.FileColumns.DISPLAY_NAME, MediaStore.Files.FileColumns.SIZE, MediaStore.Files.FileColumns.DATE_MODIFIED,
@@ -605,7 +605,7 @@ suspend fun CoroutineScope.settingsLaunch(ctx: Context): List<Setting>{
     val settings = mutableListOf<Setting>()
     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR1)
         return settings
-    launch {
+    launch(Dispatchers.IO) {
         ctx.contentResolver.query(Settings.Global.CONTENT_URI, null, null, null, "${Settings.Global.NAME} DESC")?.use { cur ->
             if (cur.moveToFirst()) {
                 val idIdx = cur.getColumnIndex(Settings.Global._ID)
@@ -628,7 +628,7 @@ suspend fun CoroutineScope.bookmarksLaunch(ctx: Context): List<Bookmark>{
     val bookmarks = mutableListOf<Bookmark>()
     if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
         return bookmarks
-    launch {
+    launch(Dispatchers.IO) {
         val projection = arrayOf("_id", "title", "url", "bookmark", "visits", "date")
         ctx.contentResolver.query(Uri.parse("content://browser/bookmarks"), projection, null, null, "date DESC")?.use { cur ->
             if(cur.moveToFirst()){
@@ -659,7 +659,7 @@ suspend fun CoroutineScope.dictionaryLaunch(ctx: Context): List<DictionaryWord>{
     val words = mutableListOf<DictionaryWord>()
     if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
         return words
-    launch {
+    launch(Dispatchers.IO) {
         ctx.contentResolver.query(UserDictionary.Words.CONTENT_URI, arrayOf(UserDictionary.Words._ID, UserDictionary.Words.WORD), null, null, UserDictionary.Words.DEFAULT_SORT_ORDER)?.use { cur ->
             if(cur.moveToFirst()){
                 val idIdx = cur.getColumnIndex(UserDictionary.Words._ID)
@@ -678,7 +678,7 @@ suspend fun CoroutineScope.dictionaryLaunch(ctx: Context): List<DictionaryWord>{
 
 suspend fun CoroutineScope.accountsLaunch(ctx: Context): List<UserAccount>{
     val accounts = mutableListOf<UserAccount>()
-    launch { AccountManager.get(ctx.applicationContext).accounts.forEach{ account -> accounts.add(UserAccount(account.name, account.type)) } }.join()
+    launch(Dispatchers.Default) { AccountManager.get(ctx.applicationContext).accounts.forEach{ account -> accounts.add(UserAccount(account.name, account.type)) } }.join()
     return accounts
 }
 
